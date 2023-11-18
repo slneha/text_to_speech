@@ -22,8 +22,8 @@ export const handler = async event => {
       LogicalResourceId: event.LogicalResourceId
     };
 
-    console.log('To forcibly fail this provision, execute this cURL command:');
-    console.log(`curl -X PUT '${event.ResponseURL}' -H 'Content-Type:' -d '${JSON.stringify(failureResponse)}'`);
+    //console.log('To forcibly fail this provision, execute this cURL command:');
+    //console.log(`curl -X PUT '${event.ResponseURL}' -H 'Content-Type:' -d '${JSON.stringify(failureResponse)}'`);
 
     switch (event.RequestType) {
       case 'Create':
