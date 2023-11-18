@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { CodeBuildClient, StartBuildCommand } from "@aws-sdk/client-codebuild";
 
 import { sendProvisionResponse } from './sendProvisionResponse.mjs';
@@ -5,12 +6,17 @@ import { sendProvisionResponse } from './sendProvisionResponse.mjs';
 export const handler = async event => {
   console.log(JSON.stringify(event, undefined, 2));
 
+  // Function to generate a unique PhysicalResourceId
+  const generatePhysicalResourceId = () => {
+    return 'resource-' + uuidv4(); // This generates a UUID and appends it to 'resource-'
+  };
+
   if (event.RequestType) {
     // Custom resource trigger
     const failureResponse = {
       Status: 'FAILED',
       Reason: 'Manually cancelled',
-      PhysicalResourceId: event.PhysicalResourceId || 'resource',
+      PhysicalResourceId: event.PhysicalResourceId || generatePhysicalResourceId(), // Use generated ID if not present
       StackId: event.StackId,
       RequestId: event.RequestId,
       LogicalResourceId: event.LogicalResourceId
@@ -25,7 +31,7 @@ export const handler = async event => {
         return startCodeBuild(event);
   
       case 'Delete':
-        return sendProvisionResponse(event.PhysicalResourceId || 'resource', null, 'SUCCESS', event);
+        return sendProvisionResponse(event.PhysicalResourceId || generatePhysicalResourceId(), null, 'SUCCESS', event);
   
       default:
         console.log(`Unhandled event.RequestType: ${event.RequestType}, manually cancel using curl command above`);
@@ -76,7 +82,7 @@ const startCodeBuild = async message => {
   } catch (err) {
     const msg = `Failed to start CodeBuild project: ${err.message}`;
     console.log(msg);
-    return sendProvisionResponse(message.PhysicalResourceId || 'resource', null, 'FAILED', message, msg);
+    return sendProvisionResponse(message.PhysicalResourceId || generatePhysicalResourceId(), null, 'FAILED', message, msg);
   }
 };
 
@@ -131,7 +137,7 @@ const handleCodeBuildEvent = async message => {
       return;
     } else {
       return sendProvisionResponse(
-        map.SOURCE_VERSION || 'resource',
+        map.SOURCE_VERSION || generatePhysicalResourceId(),
         null,
         'FAILED',
         body,
