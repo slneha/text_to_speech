@@ -230,6 +230,7 @@ Resources:
                   - cd ${SourceDirectory}
               pre_build:
                 commands:
+                  - chmod +x ./productionBuild.sh  # Add this line to make the script executable
                   - |
                     if [ ! -f yarn.lock -a -f package.json ]; then
                       npm install --production
