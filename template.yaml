@@ -360,7 +360,7 @@ Resources:
       CodeUri: src/WebsiteBuildTrigger
       Handler: index.handler
       Runtime: nodejs18.x
-      MemorySize: 5000
+      MemorySize: 3008
       Timeout: 30
       Tracing: Active
       Policies:
@@ -383,7 +383,7 @@ Parameters:
   SourceLocation:
     Type: String
     Description: Location of source code for deployment (designed to work with public Github repos)
-    Default: https://github.com/deeheber/text-to-speech-converter.git
+    Default: https://github.com/slneha/text_to_speech.git
   SourceVersion:
     Type: String
     Description: Source version for deployment (i.e. Git SHA)
