@@ -25,7 +25,7 @@ export const handler = async event => {
         return startCodeBuild(event);
   
       case 'Delete':
-        return sendProvisionResponse(event.PhysicalResourceId || 'resource', null, 'SUCCESS', event);
+        return sendProvisionResponse(event.PhysicalResourceId, null, 'SUCCESS', event);
   
       default:
         console.log(`Unhandled event.RequestType: ${event.RequestType}, manually cancel using curl command above`);
