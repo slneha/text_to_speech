@@ -8,7 +8,7 @@ export const sendProvisionResponse = async (physicalResourceId, attributes, stat
     const response = {
       Status: status,
       Reason: reason,
-      PhysicalResourceId: message.physicalResourceId,
+      PhysicalResourceId: physicalResourceId,
       StackId: message.StackId,
       RequestId: message.RequestId,
       LogicalResourceId: message.LogicalResourceId,

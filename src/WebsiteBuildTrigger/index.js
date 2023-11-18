@@ -113,13 +113,13 @@ const handleCodeBuildEvent = async message => {
 
     switch (detail['build-status']) {
       case 'SUCCEEDED':
-        return sendProvisionResponse(map.SOURCE_VERSION, null, 'SUCCESS', body);
+        return sendProvisionResponse(map.SOURCE_VERSION || 'resource', null, 'SUCCESS', body);
 
       case 'FAULT':
       case 'TIMED_OUT':
       case 'FAILED':
       case 'STOPPED':
-        return sendProvisionResponse(map.SOURCE_VERSION, null, 'FAILED', body, `Failed to publish site, see ${consoleLink}`);
+        return sendProvisionResponse(map.SOURCE_VERSION || 'resource', null, 'FAILED', body, `Failed to publish site, see ${consoleLink}`);
       default:
         throw new Error(`Unrecognized build status: ${detail['build-status']}`);
     }
