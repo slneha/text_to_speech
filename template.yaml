@@ -18,12 +18,14 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub ${AWS::StackName}-frontend
+      AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
   FileStore:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Sub ${AWS::StackName}-filestore
+      AccessControl: PublicRead
   CreateNewFile:
     Type: AWS::Serverless::Function
     Properties:
