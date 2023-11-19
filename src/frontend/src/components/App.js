@@ -63,7 +63,11 @@ function App () {
 
     return (
       <div className='container'>
+        <h1>Cloud Project</h1>
         <h1>Text to speech converter</h1>
+        <p>Neha L Senthil</p>
+        <p>Sheeba Grace I</p>
+
         <Form
           API={API}
           setIsLoading={setIsLoading}

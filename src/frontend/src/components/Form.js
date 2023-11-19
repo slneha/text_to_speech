@@ -62,7 +62,6 @@ function Form ({ API, setIsLoading, setRows }) {
 
   return (
     <div className='formContainer'>
-      <h1>Cloud Project</h1>
       <form onSubmit={handleSubmit}>
         <select name='voice' value={formData.voice} onChange={handleChange}>
           <option value=''>Select voice</option>
